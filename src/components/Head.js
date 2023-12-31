@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsYoutube, BsCameraVideo, BsBell } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -7,9 +7,29 @@ import { AiOutlineSearch, AiOutlineClose } from "react-icons/ai";
 import { TiMicrophone } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
+import { YOUTUBE_SEARCH_API } from "../constants";
 
 const Head = () => {
   const dispatch = useDispatch();
+  const [searchQuery, setSearchQuery] = useState("");
+  const[showItems,setShowItems]=useState(false);
+  const[suggestions,setSuggestions] = useState([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      getSearchData();
+    }, 1000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [searchQuery]);
+
+  const getSearchData = async () => {
+    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const json = await data.json();
+    setSuggestions(json[1]);
+  };
+
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
@@ -26,16 +46,31 @@ const Head = () => {
         </div>
       </div>
       <div className="col-span-10 px-10 flex items-center">
-        <input
-          type="text"
-          className="w-1/2 border border-gray-400 p-2 pl-5 rounded-l-full"
-        />
-        <button
-          style={{ height: "41px" }}
-          className="border border-gray-400 rounded-r-full w-10 flex items-center justify-center"
-        >
-          <AiOutlineSearch />
-        </button>
+        <div className="w-full">
+          <div className="w-full flex">
+            <input
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              onFocus={() => setShowItems(true)}
+              onBlur={() => setShowItems(false)}
+              type="text"
+              className="w-1/2 border border-gray-400 p-2 pl-5 rounded-l-full"
+            />
+            <button
+              style={{ height: "41px" }}
+              className="border border-gray-400 rounded-r-full w-10 flex items-center justify-center"
+            >
+              <AiOutlineSearch />
+            </button>
+          </div>
+          {showItems && <div className="fixed">
+            <ul style={{ width: '440px' }} className={suggestions.length && "bg-white py-2 px-5 rounded-lg shadow-sm"}>
+              {suggestions.map((value) => {
+                  return <li className="flex px-2 items-center gap-2 hover:bg-gray-100"><AiOutlineSearch/>{value}</li>
+              })}
+            </ul>
+          </div>}
+        </div>
         <div className="text-xl bg-zinc-700 p-3 ml-4 text-white rounded-full hover:cursor-pointer hover:bg-zinc-500">
           <TiMicrophone />
         </div>

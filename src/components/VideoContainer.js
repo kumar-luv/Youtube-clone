@@ -21,8 +21,8 @@ const VideoContainer = () => {
       {videos.map((video) => {
         if (video && video?.id) {
           return (
-            <Link to={"/watch?v=" + video.id}>
-              <VideoCard key={video.id} info={video} />
+            <Link key={video.id} to={"/watch?v=" + video.id}>
+              <VideoCard  info={video} />
             </Link>
           );
         }

@@ -69,7 +69,7 @@ export default function Sidebar() {
     ],
   ];
   return ( toggleMenu &&
-    <div className="w-2/12 pb-8 pr-5 overflow-auto sticky top-0 z-50 h-full">
+    <div className="w-2/12 pb-8 pr-5 overflow-auto sticky top-0 z-30 h-full">
       <ul className="flex flex-col border-b-2 border-gray-700">
         {mainLinks.map(({ icon, name }) => {
           return (
