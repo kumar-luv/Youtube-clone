@@ -8,17 +8,23 @@ import { TiMicrophone } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SEARCH_API } from "../constants";
+import { cacheData } from "../utils/searchSlice";
 
 const Head = () => {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
   const[showItems,setShowItems]=useState(false);
   const[suggestions,setSuggestions] = useState([]);
+  const searchCache = useSelector((store) => store.cacheResult);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      getSearchData();
-    }, 1000);
+      if(searchCache[searchQuery]){
+        setSuggestions(searchCache[searchQuery]);
+      }else{
+        getSearchData();
+      }
+    }, 200);
     return () => {
       clearTimeout(timer);
     };
@@ -28,6 +34,7 @@ const Head = () => {
     const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
     const json = await data.json();
     setSuggestions(json[1]);
+    dispatch(cacheData({[searchQuery]:json[1]}));
   };
 
   const toggleMenuHandler = () => {
