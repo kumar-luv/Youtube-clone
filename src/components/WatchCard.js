@@ -14,11 +14,12 @@ const WatchCard = () => {
   }, []);
   return (
     <div className="flex flex-col w-full">
-      <div className="px-5 flex w-full">
+      <div className="px-5 flex w-[400px] md:w-full">
         <div>
           <iframe
-            width="800"
-            height="500"
+            width="350"
+            height="400"
+            className="md:w-[800px] md:h-[500px]"
             src={"https://www.youtube.com/embed/" + id + "?autoplay=1"}
             title="YouTube video player"
             frameBorder="0"
@@ -26,7 +27,7 @@ const WatchCard = () => {
             allowFullScreen
           ></iframe>
         </div>
-        <div className="w-[400px]">
+        <div className="w-[400px] hidden md:block">
           <LiveChat />
         </div>
       </div>

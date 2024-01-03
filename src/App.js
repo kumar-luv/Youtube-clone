@@ -1,6 +1,5 @@
 import { Provider } from "react-redux";
 import "./App.css";
-import Head from "./components/Head";
 import store from "./utils/appStore";
 import { RouterProvider } from "react-router-dom";
 import { appRouter } from ".";

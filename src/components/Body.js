@@ -5,7 +5,7 @@ import Head from "./Head";
 
 const Body = () => {
   return (
-    <div className="flex flex-col dark:bg-gray-900">
+    <div className="flex flex-col w-[400px] sm:w-full dark:bg-gray-900">
     <Head/>
       <div className="flex w-full relative">
         <Sidebar />
