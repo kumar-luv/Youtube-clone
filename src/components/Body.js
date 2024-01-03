@@ -1,14 +1,18 @@
-import React from 'react'
-import Sidebar from './Sidebar'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import Sidebar from "./Sidebar";
+import { Outlet } from "react-router-dom";
+import Head from "./Head";
 
 const Body = () => {
   return (
-    <div className='flex w-full'>
-        <Sidebar/>
-        <Outlet/>
+    <div className="flex flex-col dark:bg-gray-900">
+    <Head/>
+      <div className="flex w-full relative">
+        <Sidebar />
+        <Outlet />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Body
+export default Body;

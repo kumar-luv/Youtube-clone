@@ -25,7 +25,7 @@
 
 // export default CommentsContainer;
 import React, { useState } from "react";
-import { commentsData } from "../constants";
+import { commentsData } from "../utils/constants";
 import Comment from "./Comment";
 
 const CommentList = ({ comments, setData,completeData }) => {
@@ -33,7 +33,7 @@ const CommentList = ({ comments, setData,completeData }) => {
     <div key={index}>
       <Comment data={comment} completeData = {completeData} setData={setData} />
       {comment.replies.length > 0 && (
-        <div className="pl-5 border border-l-black ml-5">
+        <div className="pl-5 light:border light:border-l-black ml-5">
           <CommentList comments={comment.replies} completeData = {completeData} setData={setData} />
         </div>
       )}
@@ -45,8 +45,8 @@ const CommentsContainer = () => {
   const [data, setData] = useState(commentsData);
 
   return (
-    <div className="m-5 p-2">
-      <h1 className="font-bold text-2xl">Comments:</h1>
+    <div className="m-5 p-2 w-[800px]">
+      <h1 className="font-bold text-2xl dark:text-white">Comments:</h1>
       <CommentList comments={data} completeData = {data} setData={setData} />
     </div>
   );

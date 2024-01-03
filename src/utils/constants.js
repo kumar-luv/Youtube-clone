@@ -102,10 +102,17 @@ export const commentsData = [
     ],
   },
 ];
-const GOOGLE_API_KEY = "AIzaSyChQOmcuJsYs70ztc5horm2o8weFd_-9Jo";
+
+export const LIVE_CHAT_COUNT = 25;
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+
 export const YOUTUBE_API_KEY =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=" +
   GOOGLE_API_KEY;
-
+const TEXT_SEARCH_API_BASE =
+  "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=";
+export function generateSearchURL(query) {
+  return `${TEXT_SEARCH_API_BASE}${query}&key=${GOOGLE_API_KEY}`;
+}
 export const YOUTUBE_SEARCH_API =
   "http://suggestqueries.google.com/complete/search?client=youtube&ds=yt&client=firefox&q=";

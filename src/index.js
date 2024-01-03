@@ -6,6 +6,8 @@ import {createBrowserRouter } from "react-router-dom";
 import WatchCard from './components/WatchCard';
 import Body from './components/Body';
 import MainContainer from './components/MainContainer';
+import Search from './components/Search';
+import Error from './components/Error';
 export const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -19,7 +21,12 @@ export const appRouter = createBrowserRouter([
         path: "/",
         element: <MainContainer />,
       },
+      {
+        path: "/search",
+        element:<Search/>
+      }
     ],
+    errorElement: <Error/>,
   },
 ]);
 

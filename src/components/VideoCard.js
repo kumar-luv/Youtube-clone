@@ -32,7 +32,7 @@ const VideoCard = ({ info }) => {
   const viewCount = formatViewCount(statistics?.viewCount);
 
   return (
-    <div className="p-2 m-2 w-80 shadow-md relative rounded-sm">
+    <div className="p-2 m-2 w-80 shadow-md relative rounded-sm dark:text-white">
         <img alt="thumnail" className="relative rounded-lg" src={thumbnails.medium.url} />
         <div className="absolute bg-black text-white bg-opacity-80 p-1 rounded-md m-1 top-32 right-4">{time}</div>
       <ul>
