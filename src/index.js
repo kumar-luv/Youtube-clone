@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {createBrowserRouter } from "react-router-dom";
-import WatchCard from './components/WatchCard';
 import Body from './components/Body';
 import MainContainer from './components/MainContainer';
-import Search from './components/Search';
 import Error from './components/Error';
+import Shimmer from './components/Shimmer';
+
+const Search = lazy(()=>import('./components/Search'));
+const WatchCard = lazy(()=>import('./components/WatchCard'));
 export const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -15,20 +17,29 @@ export const appRouter = createBrowserRouter([
     children: [
       {
         path: "/watch",
-        element: <WatchCard />,
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <WatchCard />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/search",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Search />
+          </Suspense>
+        ),
       },
       {
         path: "/",
         element: <MainContainer />,
       },
-      {
-        path: "/search",
-        element:<Search/>
-      }
     ],
-    errorElement: <Error/>,
+    errorElement: <Error />,
   },
 ]);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
