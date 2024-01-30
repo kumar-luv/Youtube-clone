@@ -100,9 +100,9 @@ const Head = () => {
         />
         <div className="flex gap-1 justify-center items-center">
           <Link className="flex" to={"/"}>
-            <BsYoutube className="text-red-600 text-3xl ml-2 hover:cursor-pointer" />
+            <BsYoutube className="text-orange-600 text-3xl ml-2 hover:cursor-pointer" />
             <span className="text-xl ml-1 font-medium hover:cursor-pointer">
-              Youtube
+              EasyStream
             </span>
           </Link>
         </div>
