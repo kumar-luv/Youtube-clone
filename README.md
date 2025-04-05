@@ -4,7 +4,7 @@ Find the repository for this project at [Easy Stream](https://github.com/kumar-l
 
 ## Live Demo
 
-Check out the live demo [here](https://video-streaming-app-beryl.vercel.app/)
+Check out the live demo [here](https://streamify8.netlify.app/)
 
 
 ## Instructions to run the code
